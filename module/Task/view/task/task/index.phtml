@@ -1,0 +1,31 @@
+<?php
+$title = 'My tasks';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<p>
+    <a href="<?= $this->url('task', ['action' => 'add']) ?>">Add new task</a>
+</p>
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th width="20%">Title</th>
+            <th width="35%">Description</th>
+            <th width="15%">Creation Date</th>
+            <th width="10%">Status</th>
+            <th width="10%">&nbsp;</th>
+        </tr>
+        <?php foreach ($tasks as $task) : ?>
+            <tr>
+                <td><?= $this->escapeHtml($task->title) ?></td>
+                <td><?= $this->escapeHtml($task->description) ?></td>
+                <td><?= $this->escapeHtml($task->creation_date) ?></td>
+                <td><?= $this->escapeHtml($task->status) ?></td>
+                <td>
+                    <a href="<?= $this->url('task', ['action' => 'edit', 'id' => $task->id]) ?>">Edit</a>
+                    <a href="<?= $this->url('task', ['action' => 'delete', 'id' => $task->id]) ?>">Delete</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+</div>

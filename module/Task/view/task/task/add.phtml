@@ -1,0 +1,49 @@
+<?php
+$title = 'Add new task';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+$task = $form->get('title');
+$task->setAttribute('class', 'form-control');
+$task->setAttribute('placeholder', 'Task title');
+
+$description = $form->get('description');
+$description->setAttribute('class', 'form-control');
+$description->setAttribute('placeholder', 'Description');
+
+$status = $form->get('status');
+$status->setAttribute('class', 'form-control');
+$status->setAttribute('placeholder', 'status');
+
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+$form->setAttribute('action', $this->url('task', [
+    'action' => 'add'
+]));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+
+<div class="form-group">
+    <?= $this->formLabel($task) ?>
+    <?= $this->formElement($task) ?>
+    <?= $this->formElementErrors()->render($task, ['class' => 'help-block']) ?>
+</div>
+<div class="form-group">
+    <?= $this->formLabel($description) ?>
+    <?= $this->formElement($description) ?>
+    <?= $this->formElementErrors()->render($description, ['class' => 'help-block']) ?>
+</div>
+<div class="form-group">
+    <?= $this->formLabel($status) ?>
+    <?= $this->formElement($status) ?>
+    <?= $this->formElementErrors()->render($status, ['class' => 'help-block']) ?>
+</div>
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->formHidden($form->get('id'));
+echo $this->form()->closeTag();

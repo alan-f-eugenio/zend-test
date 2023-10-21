@@ -1,0 +1,43 @@
+<?php
+$title = 'Login';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+$email = $form->get('email');
+$email->setAttribute('class', 'form-control');
+$email->setAttribute('placeholder', 'Email');
+
+$password = $form->get('password');
+$password->setAttribute('class', 'form-control');
+$password->setAttribute('placeholder', 'Password');
+
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+$form->setAttribute('action', $this->url('login'));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+
+<div class="form-group">
+    <?= $this->formLabel($email) ?>
+    <?= $this->formElement($email) ?>
+    <?= $this->formElementErrors()->render($email, ['class' => 'help-block']) ?>
+</div>
+<div class="form-group">
+    <?= $this->formLabel($password) ?>
+    <?= $this->formElement($password) ?>
+    <?= $this->formElementErrors()->render($password, ['class' => 'help-block']) ?>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelector("#password").value = 'password';
+    })
+</script>
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->form()->closeTag();
